@@ -1,0 +1,22 @@
+import { Hero } from '@/components/Hero';
+import { Services } from '@/components/Services';
+import { Process } from '@/components/Process';
+import { WhyChooseUs } from '@/components/WhyChooseUs';
+import { CTA } from '@/components/CTA';
+import { buildMetadata } from '@/lib/seo';
+
+export const metadata = buildMetadata({
+  path: '/',
+});
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Services />
+      <Process />
+      <WhyChooseUs />
+      <CTA />
+    </>
+  );
+}

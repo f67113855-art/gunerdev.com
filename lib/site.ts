@@ -1,0 +1,60 @@
+export const site = {
+  name: 'Gunerdev',
+  legalName: 'Gunerdev Yazılım',
+  domain: 'gunerdev.com',
+  url: 'https://gunerdev.com',
+  tagline: 'Hızlı, ölçeklenebilir ve modern web uygulamaları geliştiriyoruz.',
+  description:
+    'Gunerdev; startup ve büyüyen işletmeler için yüksek performanslı web uygulamaları, özel yazılım çözümleri ve backend sistemleri geliştiren kurumsal bir yazılım ekibidir.',
+  email: 'iletisim@gunerdev.com',
+  phone: '+90 (000) 000 00 00',
+  address: 'İstanbul, Türkiye',
+  locale: 'tr_TR',
+  language: 'tr',
+} as const;
+
+export const navigation = [
+  { label: 'Anasayfa', href: '/' },
+  { label: 'Hakkımızda', href: '/about' },
+  { label: 'Hizmetler', href: '/services' },
+  { label: 'Projeler', href: '/projects' },
+  { label: 'İletişim', href: '/contact' },
+] as const;
+
+export const footerNavigation = {
+  company: {
+    title: 'Şirket',
+    links: [
+      { label: 'Hakkımızda', href: '/about' },
+      { label: 'Hizmetler', href: '/services' },
+      { label: 'Projeler', href: '/projects' },
+      { label: 'İletişim', href: '/contact' },
+    ],
+  },
+  services: {
+    title: 'Hizmetler',
+    links: [
+      { label: 'Web Uygulamaları', href: '/services#web-applications' },
+      { label: 'Özel Yazılım', href: '/services#custom-software' },
+      { label: 'Backend & API', href: '/services#backend-api' },
+      { label: 'Performans Optimizasyonu', href: '/services#performance' },
+      { label: 'Teknik Danışmanlık', href: '/services#consulting' },
+    ],
+  },
+  legal: {
+    title: 'Yasal',
+    links: [
+      { label: 'Gizlilik Politikası', href: '/privacy' },
+      { label: 'Kullanım Koşulları', href: '/terms' },
+      { label: 'KVKK', href: '/kvkk' },
+    ],
+  },
+} as const;
+
+export const social = [
+  { label: 'GitHub', href: 'https://github.com', external: true },
+  { label: 'LinkedIn', href: 'https://linkedin.com', external: true },
+  { label: 'X', href: 'https://x.com', external: true },
+] as const;
+
+export type NavItem = (typeof navigation)[number];
