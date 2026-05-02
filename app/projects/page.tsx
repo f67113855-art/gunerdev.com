@@ -1,6 +1,7 @@
 import { ProjectCard, type Project } from '@/components/ProjectCard';
 import { SectionHeading } from '@/components/SectionHeading';
 import { CTA } from '@/components/CTA';
+import { PageHero } from '@/components/PageHero';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -130,24 +131,14 @@ const projects: Project[] = [
 export default function ProjectsPage() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-radial-fade" />
-        <div className="container relative pt-20 pb-12 md:pt-28 md:pb-16">
-          <div className="max-w-3xl">
-            <span className="eyebrow">
-              <span className="h-px w-6 bg-muted-foreground/40" aria-hidden="true" />
-              Projeler
-            </span>
-            <h1 className="mt-5 text-display-lg font-semibold tracking-tight text-balance gradient-text">
-              Müşterilerimiz için ürettiğimiz iş sonuçları.
-            </h1>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg text-pretty">
-              Her projeyi bir vaka çalışması olarak ele alıyoruz: çözmeye çalıştığımız problem,
-              uyguladığımız çözüm ve teslim ettiğimiz ölçülebilir sonuç.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Projeler"
+        title="Müşterilerimiz için ürettiğimiz iş sonuçları."
+        description="Her projeyi bir vaka çalışması olarak ele alıyoruz: çözmeye çalıştığımız problem, uyguladığımız çözüm ve teslim ettiğimiz ölçülebilir sonuç."
+        imageSrc="/hero-projects.jpg"
+        imageAlt=""
+        imagePosition="center 30%"
+      />
 
       <section className="pb-20 md:pb-28">
         <div className="container">

@@ -1,4 +1,5 @@
 import { CTA } from '@/components/CTA';
+import { PageHero } from '@/components/PageHero';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata = buildMetadata({
@@ -130,25 +131,14 @@ const services: ServiceDetail[] = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-radial-fade" />
-        <div className="container relative pt-20 pb-12 md:pt-28 md:pb-16">
-          <div className="max-w-3xl">
-            <span className="eyebrow">
-              <span className="h-px w-6 bg-muted-foreground/40" aria-hidden="true" />
-              Hizmetler
-            </span>
-            <h1 className="mt-5 text-display-lg font-semibold tracking-tight text-balance gradient-text">
-              Uçtan uca yazılım mühendisliği hizmetleri.
-            </h1>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg text-pretty">
-              Web uygulamasından sunucu altyapısına, performans iyileştirmesinden teknik
-              danışmanlığa kadar; modern bir yazılım ürününün ihtiyaç duyduğu tüm mühendislik
-              hizmetlerini tek bir ekipten alabilirsiniz.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Hizmetler"
+        title="Uçtan uca yazılım mühendisliği hizmetleri."
+        description="Web uygulamasından sunucu altyapısına, performans iyileştirmesinden teknik danışmanlığa kadar; modern bir yazılım ürününün ihtiyaç duyduğu tüm mühendislik hizmetlerini tek bir ekipten alabilirsiniz."
+        imageSrc="/hero-services.jpg"
+        imageAlt=""
+        imagePosition="center 40%"
+      />
 
       <section className="pb-20 md:pb-28">
         <div className="container">

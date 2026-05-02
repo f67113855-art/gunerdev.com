@@ -1,4 +1,5 @@
 import { ContactForm } from '@/components/ContactForm';
+import { PageHero } from '@/components/PageHero';
 import { buildMetadata } from '@/lib/seo';
 import { site } from '@/lib/site';
 
@@ -47,25 +48,14 @@ const expectations = [
 export default function ContactPage() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-radial-fade" />
-        <div className="container relative pt-20 pb-12 md:pt-28 md:pb-16">
-          <div className="max-w-3xl">
-            <span className="eyebrow">
-              <span className="h-px w-6 bg-muted-foreground/40" aria-hidden="true" />
-              İletişim
-            </span>
-            <h1 className="mt-5 text-display-lg font-semibold tracking-tight text-balance gradient-text">
-              Projenizi konuşalım.
-            </h1>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg text-pretty">
-              Mevcut bir ürünü büyütmek, yeni bir uygulama inşa etmek veya teknik bir konuda görüş
-              almak için aşağıdaki formu doldurun ya da doğrudan bize yazın. Her başvuruya kişisel
-              olarak dönüş yapıyoruz.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="İletişim"
+        title="Projenizi konuşalım."
+        description="Mevcut bir ürünü büyütmek, yeni bir uygulama inşa etmek veya teknik bir konuda görüş almak için aşağıdaki formu doldurun ya da doğrudan bize yazın. Her başvuruya kişisel olarak dönüş yapıyoruz."
+        imageSrc="/hero-contact.jpg"
+        imageAlt=""
+        imagePosition="center 60%"
+      />
 
       <section className="pb-20 md:pb-28">
         <div className="container">
