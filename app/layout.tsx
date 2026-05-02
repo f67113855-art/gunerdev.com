@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Inter, Fraunces, Geist_Mono } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ThemeRouter } from '@/components/ThemeRouter';
@@ -16,9 +16,17 @@ const inter = Inter({
   display: 'swap',
 });
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   subsets: ['latin', 'latin-ext'],
+  axes: ['SOFT', 'opsz'],
+  style: ['normal', 'italic'],
   variable: '--font-display',
+  display: 'swap',
+});
+
+const geistMono = Geist_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -35,7 +43,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang={site.language} className={cn(inter.variable, spaceGrotesk.variable, 'dark')} suppressHydrationWarning>
+    <html lang={site.language} className={cn(inter.variable, fraunces.variable, geistMono.variable, 'dark')} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
