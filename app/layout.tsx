@@ -2,10 +2,13 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { ThemeRouter } from '@/components/ThemeRouter';
 import { buildMetadata } from '@/lib/seo';
 import { site } from '@/lib/site';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
+
+const themeBootScript = `(function(){try{var p=location.pathname;var t='home';if(p.indexOf('/services')===0)t='services';else if(p.indexOf('/about')===0)t='about';else if(p.indexOf('/projects')===0)t='projects';else if(p.indexOf('/contact')===0)t='contact';document.documentElement.dataset.theme=t;}catch(e){}})();`;
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -33,6 +36,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang={site.language} className={cn(inter.variable, spaceGrotesk.variable, 'dark')} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <a
           href="#main-content"
@@ -40,6 +46,7 @@ export default function RootLayout({
         >
           İçeriğe geç
         </a>
+        <ThemeRouter />
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}

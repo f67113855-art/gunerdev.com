@@ -4,23 +4,54 @@
 
 @layer base {
   :root {
-    --background: 240 10% 4%;
-    --foreground: 240 6% 93%;
+    /* Tema (route bazlı override edilir; bkz. [data-theme="..."]) */
+    --theme-hue: 244;
+    --theme-glow: var(--theme-hue) 70% 22%;
+    --theme-glow-secondary: 264 60% 22%;
 
-    --surface: 240 8% 7%;
-    --surface-elevated: 240 7% 10%;
+    --background: 226 32% 5%;
+    --foreground: 220 14% 94%;
 
-    --border: 240 6% 16%;
+    --surface: 226 24% 8%;
+    --surface-elevated: 226 20% 11%;
 
-    --muted: 240 6% 14%;
-    --muted-foreground: 240 5% 64%;
+    --border: 226 14% 17%;
 
-    --accent: 244 75% 62%;
-    --accent-muted: 244 60% 50%;
+    --muted: 226 14% 14%;
+    --muted-foreground: 226 8% 66%;
+
+    --accent: var(--theme-hue) 75% 62%;
+    --accent-muted: var(--theme-hue) 60% 50%;
     --accent-foreground: 0 0% 100%;
 
     --success: 152 60% 48%;
     --danger: 358 70% 60%;
+  }
+
+  /* Route bazlı tema paleti */
+  [data-theme='home'] {
+    --theme-hue: 244; /* indigo */
+    --theme-glow-secondary: 264 60% 22%;
+  }
+
+  [data-theme='about'] {
+    --theme-hue: 270; /* mor */
+    --theme-glow-secondary: 290 60% 22%;
+  }
+
+  [data-theme='services'] {
+    --theme-hue: 152; /* yeşil */
+    --theme-glow-secondary: 172 55% 22%;
+  }
+
+  [data-theme='projects'] {
+    --theme-hue: 190; /* cyan / teal */
+    --theme-glow-secondary: 210 60% 22%;
+  }
+
+  [data-theme='contact'] {
+    --theme-hue: 340; /* rose */
+    --theme-glow-secondary: 320 55% 24%;
   }
 
   * {
@@ -38,6 +69,20 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+    background-image:
+      radial-gradient(
+        ellipse 80% 50% at 50% -10%,
+        hsl(var(--theme-glow) / 0.35),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 40% at 100% 0%,
+        hsl(var(--theme-glow-secondary) / 0.18),
+        transparent 65%
+      );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    transition: background-color 400ms ease;
   }
 
   ::selection {
