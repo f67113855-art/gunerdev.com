@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { validateContact } from '@/lib/validation';
 import { rateLimit } from '@/lib/rate-limit';
+import { sendTelegramContactNotification } from '@/lib/telegram';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -64,9 +65,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  // Mesajın işlenmesi için entegrasyon noktası.
-  // Üretimde: e-posta gönderim servisi, CRM webhook'u veya veritabanı kaydı buraya bağlanır.
-  // Bu yapı, harici servis bağımlılığı olmadan doğrudan deploy edilebilir.
   if (process.env.NODE_ENV !== 'production') {
     console.info('[contact] Yeni başvuru alındı', {
       name: result.data.name,
@@ -74,6 +72,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       company: result.data.company,
     });
   }
+
+  await sendTelegramContactNotification(result.data);
 
   return NextResponse.json(
     {

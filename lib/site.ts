@@ -6,9 +6,10 @@ export const site = {
   tagline: 'Hızlı, ölçeklenebilir ve modern web uygulamaları geliştiriyoruz.',
   description:
     'Gunerdev; startup ve büyüyen işletmeler için yüksek performanslı web uygulamaları, özel yazılım çözümleri ve backend sistemleri geliştiren kurumsal bir yazılım ekibidir.',
-  email: 'iletisim@gunerdev.com',
-  phone: '+90 (000) 000 00 00',
-  address: 'İstanbul, Türkiye',
+  email: 'f67113855@gmail.com',
+  phone: '+90 536 215 16 44',
+  address: 'Kayseri, Türkiye',
+  telegram: 'FurkanGUNERDEV',
   locale: 'tr_TR',
   language: 'tr',
 } as const;

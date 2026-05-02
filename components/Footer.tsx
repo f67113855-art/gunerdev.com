@@ -28,11 +28,27 @@ export function Footer() {
                 href={`mailto:${site.email}`}
                 className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
               >
-                <span className="text-xs uppercase tracking-widest text-muted-foreground/70">E-posta</span>
+                <span className="w-20 text-xs uppercase tracking-widest text-muted-foreground/70">E-posta</span>
                 <span>{site.email}</span>
               </a>
+              <a
+                href={`tel:${site.phone.replace(/\s/g, '')}`}
+                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <span className="w-20 text-xs uppercase tracking-widest text-muted-foreground/70">Telefon</span>
+                <span>{site.phone}</span>
+              </a>
+              <a
+                href={`https://t.me/${site.telegram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <span className="w-20 text-xs uppercase tracking-widest text-muted-foreground/70">Telegram</span>
+                <span>@{site.telegram}</span>
+              </a>
               <span className="inline-flex items-center gap-2 text-muted-foreground">
-                <span className="text-xs uppercase tracking-widest text-muted-foreground/70">Konum</span>
+                <span className="w-20 text-xs uppercase tracking-widest text-muted-foreground/70">Konum</span>
                 <span>{site.address}</span>
               </span>
             </div>

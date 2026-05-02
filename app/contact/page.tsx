@@ -23,6 +23,13 @@ const channels = [
     description: 'Pazartesi–Cuma, 09:00–18:00 (TSİ) arasında ulaşabilirsiniz.',
   },
   {
+    label: 'Telegram',
+    value: `@${site.telegram}`,
+    href: `https://t.me/${site.telegram}`,
+    external: true,
+    description: 'Hızlı yanıt için tercih edilen kanal; mesai dışında da takip edilir.',
+  },
+  {
     label: 'Konum',
     value: site.address,
     href: null,
@@ -75,6 +82,9 @@ export default function ContactPage() {
                       {item.href ? (
                         <a
                           href={item.href}
+                          {...('external' in item && item.external
+                            ? { target: '_blank', rel: 'noopener noreferrer' }
+                            : {})}
                           className="mt-1.5 block text-base font-medium text-foreground transition-colors hover:text-accent"
                         >
                           {item.value}
