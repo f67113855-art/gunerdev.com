@@ -1,4 +1,5 @@
 import { Hero } from '@/components/Hero';
+import { ErciyesShowcase } from '@/components/ErciyesShowcase';
 import { Services } from '@/components/Services';
 import { Process } from '@/components/Process';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <ErciyesShowcase />
       <Services />
       <Process />
       <WhyChooseUs />
