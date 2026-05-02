@@ -1,5 +1,5 @@
 import { Hero } from '@/components/Hero';
-import { ErciyesShowcase } from '@/components/ErciyesShowcase';
+import { KayseriCarousel } from '@/components/KayseriCarousel';
 import { Services } from '@/components/Services';
 import { Process } from '@/components/Process';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ErciyesShowcase />
+      <KayseriCarousel />
       <Services />
       <Process />
       <WhyChooseUs />
