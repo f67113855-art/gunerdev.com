@@ -31,10 +31,6 @@ export function CustomCursor() {
       'ontouchstart' in window;
     if (isTouch) return;
     setEnabled(true);
-    document.documentElement.style.cursor = 'none';
-    return () => {
-      document.documentElement.style.cursor = '';
-    };
   }, []);
 
   useEffect(() => {
@@ -97,11 +93,6 @@ export function CustomCursor() {
     function onMove(e: MouseEvent) {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      const now = performance.now();
-      if (now - lastEmit > 14) {
-        emit(hovering ? 4 : 2);
-        lastEmit = now;
-      }
     }
 
     function onOver(e: MouseEvent) {
@@ -127,6 +118,12 @@ export function CustomCursor() {
       prev = now;
       const w = window.innerWidth;
       const h = window.innerHeight;
+
+      // Hareket dursa da alev yanmaya devam etsin — surekli emisyon
+      if (visible && now - lastEmit > 14) {
+        emit(hovering ? 4 : 2);
+        lastEmit = now;
+      }
 
       // Hafif iz birakacak sekilde silme (tam temizleme yerine alpha alpha)
       ctx!.globalCompositeOperation = 'destination-out';
