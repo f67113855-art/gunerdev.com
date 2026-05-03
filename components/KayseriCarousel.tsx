@@ -42,7 +42,7 @@ const slides: Slide[] = [
   },
 ];
 
-const AUTO_ADVANCE_MS = 6000;
+const AUTO_ADVANCE_MS = 2000;
 
 export function KayseriCarousel() {
   const [index, setIndex] = useState(0);

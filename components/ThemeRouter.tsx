@@ -8,6 +8,7 @@ function getTheme(pathname: string): string {
   if (pathname.startsWith('/about')) return 'about';
   if (pathname.startsWith('/projects')) return 'projects';
   if (pathname.startsWith('/contact')) return 'contact';
+  if (pathname.startsWith('/blog')) return 'blog';
   return 'home';
 }
 

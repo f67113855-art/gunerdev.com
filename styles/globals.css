@@ -54,6 +54,11 @@
     --theme-glow-secondary: 320 55% 24%;
   }
 
+  [data-theme='blog'] {
+    --theme-hue: 35; /* amber */
+    --theme-glow-secondary: 20 60% 22%;
+  }
+
   * {
     @apply border-border;
   }

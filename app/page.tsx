@@ -2,6 +2,7 @@ import { Hero } from '@/components/Hero';
 import { KayseriCarousel } from '@/components/KayseriCarousel';
 import { Services } from '@/components/Services';
 import { Process } from '@/components/Process';
+import { Reviews } from '@/components/Reviews';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { CTA } from '@/components/CTA';
 import { buildMetadata } from '@/lib/seo';
@@ -17,6 +18,7 @@ export default function HomePage() {
       <KayseriCarousel />
       <Services />
       <Process />
+      <Reviews />
       <WhyChooseUs />
       <CTA />
     </>

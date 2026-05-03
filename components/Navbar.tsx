@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Brand } from '@/components/Logo';
 import { navigation, site } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -41,14 +42,8 @@ export function Navbar() {
       )}
     >
       <div className="container flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="group flex items-center gap-2.5" aria-label={`${site.name} ana sayfa`}>
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-muted shadow-glow">
-            <span className="font-display text-sm font-bold text-accent-foreground">G</span>
-          </span>
-          <span className="font-display text-base font-semibold tracking-tight">
-            {site.name}
-            <span className="text-accent">.</span>
-          </span>
+        <Link href="/" aria-label={`${site.name} ana sayfa`}>
+          <Brand size={32} />
         </Link>
 
         <nav className="hidden md:block" aria-label="Ana navigasyon">

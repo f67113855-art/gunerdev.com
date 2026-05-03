@@ -29,6 +29,7 @@ export const footerNavigation = {
       { label: 'Hakkımızda', href: '/about' },
       { label: 'Hizmetler', href: '/services' },
       { label: 'Projeler', href: '/projects' },
+      { label: 'Blog', href: '/blog' },
       { label: 'İletişim', href: '/contact' },
     ],
   },
@@ -50,6 +51,13 @@ export const footerNavigation = {
       { label: 'KVKK', href: '/kvkk' },
     ],
   },
+} as const;
+
+export const businessInfo = {
+  workingHours: 'Pzt – Cuma · 09:00 – 18:00',
+  responseTime: '24 saat içinde yanıt',
+  founded: 2024,
+  founder: 'Furkan Güner',
 } as const;
 
 export const social = [
