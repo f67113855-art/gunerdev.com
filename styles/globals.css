@@ -71,6 +71,19 @@
     scroll-behavior: smooth;
   }
 
+  /* Ozel cursor — buyutulmus accent renkli ok */
+  body {
+    cursor: url('/cursors/arrow.svg') 5 4, auto;
+  }
+
+  a, button, [role='button'], summary, label[for], select, [data-cursor-hover] {
+    cursor: url('/cursors/pointer.svg') 12 4, pointer;
+  }
+
+  input, textarea {
+    cursor: text;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
