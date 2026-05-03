@@ -3,13 +3,30 @@
 // Arka plan: Ömer Haktan Bulut, Unsplash (https://unsplash.com/photos/jJpJu5bsoFQ)
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import {
+  motion,
+  animate,
+  useInView,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
 
-const stats = [
-  { value: '10+', label: 'Tamamlanan proje' },
-  { value: '%99.9', label: 'Uptime garantisi' },
-  { value: '<100ms', label: 'Ortalama API yanıtı' },
-];
+// Tamamlanan proje sayisi: 2026-05-03'ten itibaren 10 ile baslar, her 3 gunde +1.
+const PROJECT_COUNT_START = 10;
+const PROJECT_COUNT_ANCHOR = Date.UTC(2026, 4, 3);
+
+function getProjectCount(): number {
+  const days = Math.floor((Date.now() - PROJECT_COUNT_ANCHOR) / 86_400_000);
+  return PROJECT_COUNT_START + Math.max(0, Math.floor(days / 3));
+}
+
+type Stat = {
+  value: string;
+  label: string;
+  count?: number;
+  live?: boolean;
+};
 
 export function Hero() {
   return (
@@ -94,27 +111,105 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
-          className="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border/60 sm:grid-cols-3"
-        >
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col items-center justify-center gap-2 bg-surface/70 px-6 py-8 text-center backdrop-blur"
-            >
-              <span className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
-                {stat.value}
-              </span>
-              <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
+        <StatsGrid />
       </div>
     </section>
   );
 }
+
+function StatsGrid() {
+  // Hidratasyon guvenli: server'da 0 render et, client'ta gercek deger.
+  const [projectCount, setProjectCount] = useState(0);
+  useEffect(() => {
+    setProjectCount(getProjectCount());
+  }, []);
+
+  const stats: Stat[] = [
+    {
+      value: '+',
+      label: 'Tamamlanan proje',
+      count: projectCount,
+      live: true,
+    },
+    { value: '%99.9', label: 'Uptime garantisi' },
+    { value: '<100ms', label: 'Ortalama API yanıtı' },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
+      className="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border/60 sm:grid-cols-3"
+    >
+      {stats.map((stat, index) => (
+        <StatCard key={stat.label} stat={stat} index={index} />
+      ))}
+    </motion.div>
+  );
+}
+
+function StatCard({ stat, index }: { stat: Stat; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.5 + index * 0.08 }}
+      whileHover={{ scale: 1.02 }}
+      className="group relative flex flex-col items-center justify-center gap-2 overflow-hidden bg-surface/70 px-6 py-8 text-center backdrop-blur transition-colors hover:bg-surface"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-px bg-gradient-to-b from-accent/0 via-accent/0 to-accent/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      {stat.live && (
+        <span
+          aria-label="Canlı sayaç"
+          className="absolute right-4 top-4 flex h-2 w-2"
+        >
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-70" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
+        </span>
+      )}
+      <span className="relative font-display text-3xl font-semibold tracking-tight md:text-4xl">
+        {typeof stat.count === 'number' ? (
+          <CountUp to={stat.count} suffix={stat.value} />
+        ) : (
+          stat.value
+        )}
+      </span>
+      <span className="relative font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+        {stat.label}
+      </span>
+    </motion.div>
+  );
+}
+
+function CountUp({ to, suffix }: { to: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.floor(latest));
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    return rounded.on('change', (v) => setDisplay(v));
+  }, [rounded]);
+
+  useEffect(() => {
+    if (!inView || to === 0) return;
+    const controls = animate(count, to, {
+      duration: 1.6,
+      ease: [0.21, 0.47, 0.32, 0.98],
+    });
+    return controls.stop;
+  }, [inView, to, count]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
