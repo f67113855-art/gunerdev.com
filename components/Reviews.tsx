@@ -94,9 +94,6 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
               {review.name}
             </h3>
           </div>
-          {review.role && (
-            <p className="truncate text-xs text-muted-foreground">{review.role}</p>
-          )}
           <div className="mt-1.5 flex items-center gap-2">
             <StarRow rating={review.rating} />
             <span className="text-[11px] text-muted-foreground/70">
