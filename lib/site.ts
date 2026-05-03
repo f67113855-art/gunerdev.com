@@ -19,6 +19,7 @@ export const navigation = [
   { label: 'Hakkımızda', href: '/about' },
   { label: 'Hizmetler', href: '/services' },
   { label: 'Projeler', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
   { label: 'İletişim', href: '/contact' },
 ] as const;
 
