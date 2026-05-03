@@ -22,19 +22,43 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - name: Verify required secrets
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          fail=0
+          if [ -z "$SSH_HOST" ];        then echo "::error::SSH_HOST secret is empty or missing";        fail=1; fi
+          if [ -z "$SSH_USER" ];        then echo "::error::SSH_USER secret is empty or missing";        fail=1; fi
+          if [ -z "$SSH_KNOWN_HOSTS" ]; then echo "::error::SSH_KNOWN_HOSTS secret is empty or missing"; fail=1; fi
+          if [ -z "$SSH_PRIVATE_KEY" ]; then echo "::error::SSH_PRIVATE_KEY secret is empty or missing"; fail=1; fi
+          if [ "$fail" = "1" ]; then
+            echo "Add missing secrets at: https://github.com/${{ github.repository }}/settings/secrets/actions"
+            exit 1
+          fi
+          echo "All required secrets are present."
+
       - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          printf '%s\n' "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
       - name: Run deploy on VPS
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           ssh -i ~/.ssh/id_ed25519 \
               -o UserKnownHostsFile=~/.ssh/known_hosts \
               -o ConnectTimeout=15 \
-              "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+              "$SSH_USER@$SSH_HOST" \
               'bash /var/www/gunerdev/deploy/deploy.sh'
