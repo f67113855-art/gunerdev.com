@@ -32,7 +32,11 @@ const geistMono = Geist_Mono({
   display: 'swap',
 });
 
-export const metadata: Metadata = buildMetadata();
+export const metadata = {
+  verification: {
+    google: "_cO7_s2vg8jPHn3HYfwS3_bIRfzxLt0-dqHJ7Caal7g",
+  },
+};
 
 export const viewport: Viewport = {
   themeColor: '#0a0a0b',
