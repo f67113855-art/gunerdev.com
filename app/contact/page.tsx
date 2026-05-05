@@ -1,5 +1,6 @@
 import { ContactForm } from '@/components/ContactForm';
 import { PageHero } from '@/components/PageHero';
+import { ChannelIcon } from '@/components/ChannelIcon';
 import { buildMetadata } from '@/lib/seo';
 import { site } from '@/lib/site';
 
@@ -10,20 +11,32 @@ export const metadata = buildMetadata({
   path: '/contact',
 });
 
-const channels = [
+type Channel = {
+  icon: 'email' | 'phone' | 'telegram' | 'location';
+  label: string;
+  value: string;
+  href: string | null;
+  external?: boolean;
+  description: string;
+};
+
+const channels: Channel[] = [
   {
+    icon: 'email',
     label: 'E-posta',
     value: site.email,
     href: `mailto:${site.email}`,
     description: 'Detaylı projeler ve teklif talepleri için tercih edilen kanal.',
   },
   {
+    icon: 'phone',
     label: 'Telefon',
     value: site.phone,
     href: `tel:${site.phone.replace(/\s/g, '')}`,
     description: 'Pazartesi–Cuma, 09:00–18:00 (TSİ) arasında ulaşabilirsiniz.',
   },
   {
+    icon: 'telegram',
     label: 'Telegram',
     value: `@${site.telegram}`,
     href: `https://t.me/${site.telegram}`,
@@ -31,6 +44,7 @@ const channels = [
     description: 'Hızlı yanıt için tercih edilen kanal; mesai dışında da takip edilir.',
   },
   {
+    icon: 'location',
     label: 'Konum',
     value: site.address,
     href: null,
@@ -63,28 +77,33 @@ export default function ContactPage() {
             <div className="lg:col-span-5">
               <div className="rounded-2xl border border-border bg-surface p-8">
                 <h2 className="text-xl font-semibold tracking-tight">İletişim kanalları</h2>
-                <ul className="mt-6 space-y-6">
+                <ul className="mt-6 space-y-5">
                   {channels.map((item) => (
-                    <li key={item.label}>
-                      <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                        {item.label}
-                      </p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          {...('external' in item && item.external
-                            ? { target: '_blank', rel: 'noopener noreferrer' }
-                            : {})}
-                          className="mt-1.5 block text-base font-medium text-foreground transition-colors hover:text-accent"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="mt-1.5 text-base font-medium text-foreground">{item.value}</p>
-                      )}
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                        {item.description}
-                      </p>
+                    <li key={item.label} className="flex items-start gap-4">
+                      <span className="mt-0.5 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                        <ChannelIcon type={item.icon} className="h-5 w-5" />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                          {item.label}
+                        </p>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            {...(item.external
+                              ? { target: '_blank', rel: 'noopener noreferrer' }
+                              : {})}
+                            className="mt-1 block break-words text-base font-medium text-foreground transition-colors hover:text-accent"
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="mt-1 text-base font-medium text-foreground">{item.value}</p>
+                        )}
+                        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                          {item.description}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ul>
