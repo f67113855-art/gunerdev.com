@@ -2,8 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'gunerdev',
-      script: 'node_modules/next/dist/bin/next',
-      args: 'start -p 3000',
+      script: 'server.js',
       cwd: __dirname,
       instances: 'max',
       exec_mode: 'cluster',
@@ -13,6 +12,7 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         PORT: 3000,
+        HOSTNAME: '0.0.0.0',
       },
       out_file: './logs/out.log',
       error_file: './logs/error.log',

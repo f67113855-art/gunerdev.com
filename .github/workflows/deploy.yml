@@ -16,12 +16,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Deploy to gunerdev.com
+  build-and-deploy:
+    name: Build and deploy to gunerdev.com
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Assemble standalone artifact
+        run: |
+          # Standalone server'ın ihtiyaç duyduğu statik dosyaları yanına kopyala
+          cp -r public .next/standalone/public
+          mkdir -p .next/standalone/.next
+          cp -r .next/static .next/standalone/.next/static
+          cp ecosystem.config.js .next/standalone/ecosystem.config.js
+          tar czf release.tar.gz -C .next/standalone .
+          ls -lh release.tar.gz
+
       - name: Verify required secrets
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -52,6 +77,22 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
+      - name: Upload artifact and deploy script to VPS
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          scp -i ~/.ssh/id_ed25519 \
+              -o UserKnownHostsFile=~/.ssh/known_hosts \
+              -o ConnectTimeout=15 \
+              release.tar.gz \
+              "$SSH_USER@$SSH_HOST:/tmp/gunerdev-release.tar.gz"
+          scp -i ~/.ssh/id_ed25519 \
+              -o UserKnownHostsFile=~/.ssh/known_hosts \
+              -o ConnectTimeout=15 \
+              deploy/deploy.sh \
+              "$SSH_USER@$SSH_HOST:/tmp/gunerdev-deploy.sh"
+
       - name: Run deploy on VPS
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -61,4 +102,4 @@ jobs:
               -o UserKnownHostsFile=~/.ssh/known_hosts \
               -o ConnectTimeout=15 \
               "$SSH_USER@$SSH_HOST" \
-              'bash /var/www/gunerdev/deploy/deploy.sh'
+              'bash /tmp/gunerdev-deploy.sh'
