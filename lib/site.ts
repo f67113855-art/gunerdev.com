@@ -15,12 +15,12 @@ export const site = {
 } as const;
 
 export const navigation = [
-  { label: 'Anasayfa', href: '/' },
-  { label: 'Hakkımızda', href: '/about' },
-  { label: 'Hizmetler', href: '/services' },
-  { label: 'Projeler', href: '/projects' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'İletişim', href: '/contact' },
+  { label: 'Anasayfa', href: '/', icon: 'home' },
+  { label: 'Hakkımızda', href: '/about', icon: 'about' },
+  { label: 'Hizmetler', href: '/services', icon: 'services' },
+  { label: 'Projeler', href: '/projects', icon: 'projects' },
+  { label: 'Blog', href: '/blog', icon: 'blog' },
+  { label: 'İletişim', href: '/contact', icon: 'contact' },
 ] as const;
 
 export const footerNavigation = {

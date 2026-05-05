@@ -29,18 +29,18 @@ export function PageHero({
           alt={imageAlt}
           fill
           priority
-          quality={85}
+          quality={90}
           sizes="100vw"
           className="object-cover"
           style={{ objectPosition: imagePosition }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_50%,transparent_0%,hsl(var(--background)/0.45)_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_50%,transparent_0%,hsl(var(--background)/0.28)_75%)]" />
       </div>
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-radial-fade opacity-70"
+        className="pointer-events-none absolute inset-0 bg-radial-fade opacity-40"
       />
 
       <div className="container relative pt-24 pb-20 md:pt-32 md:pb-28 lg:pt-36 lg:pb-32">

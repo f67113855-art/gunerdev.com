@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Brand } from '@/components/Logo';
+import { NavIcon, type NavIconType } from '@/components/NavIcon';
 import { navigation, site } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -41,9 +42,13 @@ export function Navbar() {
           : 'border-b border-transparent bg-transparent',
       )}
     >
-      <div className="container flex h-16 items-center justify-between md:h-20">
-        <Link href="/" aria-label={`${site.name} ana sayfa`}>
-          <Brand size={32} />
+      <div className="container flex h-20 items-center justify-between md:h-24">
+        <Link
+          href="/"
+          aria-label={`${site.name} ana sayfa`}
+          className="transition-transform duration-200 hover:scale-[1.03]"
+        >
+          <Brand size={52} />
         </Link>
 
         <nav className="hidden md:block" aria-label="Ana navigasyon">
@@ -53,16 +58,23 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    'relative rounded-lg px-4 py-2 text-sm font-medium transition-colors',
+                    'group relative inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition-all',
                     isActive(item.href)
-                      ? 'text-foreground'
-                      : 'text-muted-foreground hover:text-foreground',
+                      ? 'bg-accent/15 text-foreground ring-1 ring-accent/30'
+                      : 'text-muted-foreground hover:bg-surface hover:text-foreground',
                   )}
                 >
+                  <span
+                    className={cn(
+                      'inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg transition-all',
+                      isActive(item.href)
+                        ? 'bg-accent/20 text-accent shadow-[0_0_14px_-2px_hsl(var(--accent)/0.5)]'
+                        : 'bg-surface text-muted-foreground group-hover:bg-accent/15 group-hover:text-accent',
+                    )}
+                  >
+                    <NavIcon type={item.icon as NavIconType} className="h-5 w-5" />
+                  </span>
                   {item.label}
-                  {isActive(item.href) && (
-                    <span className="absolute inset-x-4 -bottom-px h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
-                  )}
                 </Link>
               </li>
             ))}
@@ -125,12 +137,22 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    'block rounded-lg px-4 py-3 text-sm font-medium transition-colors',
+                    'flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors',
                     isActive(item.href)
-                      ? 'bg-surface-elevated text-foreground'
+                      ? 'bg-accent/10 text-foreground'
                       : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground',
                   )}
                 >
+                  <span
+                    className={cn(
+                      'inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-colors',
+                      isActive(item.href)
+                        ? 'bg-accent/20 text-accent shadow-[0_0_14px_-2px_hsl(var(--accent)/0.5)] ring-1 ring-accent/30'
+                        : 'bg-surface text-muted-foreground',
+                    )}
+                  >
+                    <NavIcon type={item.icon as NavIconType} className="h-6 w-6" />
+                  </span>
                   {item.label}
                 </Link>
               </li>

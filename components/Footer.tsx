@@ -10,8 +10,12 @@ export function Footer() {
       <div className="container py-16 lg:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Link href="/" aria-label={`${site.name} ana sayfa`}>
-              <Brand size={32} />
+            <Link
+              href="/"
+              aria-label={`${site.name} ana sayfa`}
+              className="inline-block transition-transform duration-200 hover:scale-[1.02]"
+            >
+              <Brand size={52} />
             </Link>
 
             <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">

@@ -80,8 +80,8 @@ export default function ContactPage() {
                 <ul className="mt-6 space-y-5">
                   {channels.map((item) => (
                     <li key={item.label} className="flex items-start gap-4">
-                      <span className="mt-0.5 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                        <ChannelIcon type={item.icon} className="h-5 w-5" />
+                      <span className="mt-0.5 inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-accent/15 text-accent shadow-[0_0_20px_-6px_hsl(var(--accent)/0.5)] ring-1 ring-accent/30">
+                        <ChannelIcon type={item.icon} className="h-7 w-7" />
                       </span>
                       <div className="min-w-0 flex-1">
                         <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">

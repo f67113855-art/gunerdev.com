@@ -38,16 +38,16 @@ export function Hero() {
           fill
           sizes="100vw"
           priority
-          quality={85}
+          quality={90}
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,transparent_0%,hsl(var(--background)/0.45)_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,transparent_0%,hsl(var(--background)/0.28)_75%)]" />
       </div>
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-radial-fade opacity-70"
+        className="pointer-events-none absolute inset-0 bg-radial-fade opacity-40"
       />
 
       <div className="container relative pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40">

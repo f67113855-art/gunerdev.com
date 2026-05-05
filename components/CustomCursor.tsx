@@ -19,7 +19,7 @@ type Particle = {
   hue: number;
 };
 
-const MAX_PARTICLES = 220;
+const MAX_PARTICLES = 90;
 
 export function CustomCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -61,30 +61,19 @@ export function CustomCursor() {
     let lastEmit = 0;
     const particles: Particle[] = [];
 
-    function getThemeHue(): number {
-      const v = getComputedStyle(document.documentElement)
-        .getPropertyValue('--theme-hue')
-        .trim();
-      return Number(v) || 244;
-    }
-
     function emit(count: number) {
-      const themeHue = getThemeHue();
       for (let i = 0; i < count; i++) {
         if (particles.length >= MAX_PARTICLES) particles.shift();
-        const useTheme = Math.random() > 0.65;
-        // Sicak alev tonlari (35-55) + arada tema renginde kivilcimlar
-        const hue = useTheme
-          ? themeHue + (Math.random() - 0.5) * 20
-          : 30 + Math.random() * 25;
+        // Sade sari alev tonlari (45-55 arasi)
+        const hue = 45 + Math.random() * 10;
         particles.push({
-          x: mouseX + (Math.random() - 0.5) * 6,
-          y: mouseY + (Math.random() - 0.5) * 6,
-          vx: (Math.random() - 0.5) * 0.6,
-          vy: -0.4 - Math.random() * 0.8,
+          x: mouseX + (Math.random() - 0.5) * 4,
+          y: mouseY + (Math.random() - 0.5) * 4,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: -0.3 - Math.random() * 0.5,
           life: 0,
-          maxLife: 480 + Math.random() * 320,
-          size: hovering ? 7 + Math.random() * 6 : 4 + Math.random() * 4,
+          maxLife: 380 + Math.random() * 240,
+          size: hovering ? 5 + Math.random() * 3 : 3 + Math.random() * 2,
           hue,
         });
       }
@@ -119,15 +108,15 @@ export function CustomCursor() {
       const w = window.innerWidth;
       const h = window.innerHeight;
 
-      // Hareket dursa da alev yanmaya devam etsin — surekli emisyon
-      if (visible && now - lastEmit > 14) {
-        emit(hovering ? 4 : 2);
+      // Hareket dursa da alev yanmaya devam etsin — surekli emisyon (yavasletildi)
+      if (visible && now - lastEmit > 32) {
+        emit(hovering ? 2 : 1);
         lastEmit = now;
       }
 
-      // Hafif iz birakacak sekilde silme (tam temizleme yerine alpha alpha)
+      // Iz birakacak sekilde silme (sade gorunum icin daha hizli silme)
       ctx!.globalCompositeOperation = 'destination-out';
-      ctx!.fillStyle = 'rgba(0, 0, 0, 0.20)';
+      ctx!.fillStyle = 'rgba(0, 0, 0, 0.32)';
       ctx!.fillRect(0, 0, w, h);
 
       ctx!.globalCompositeOperation = 'lighter';
@@ -142,27 +131,26 @@ export function CustomCursor() {
         const t = p.life / p.maxLife;
         p.x += p.vx * (dt / 16);
         p.y += p.vy * (dt / 16);
-        p.vy -= 0.012 * (dt / 16); // ivmelenerek yukseliyor
+        p.vy -= 0.008 * (dt / 16); // yavas yukseliyor
         p.vx *= 0.985;
 
-        const alpha = (1 - t) * 0.85;
+        const alpha = (1 - t) * 0.5;
         const radius = p.size * (1 - t * 0.45);
 
-        const grad = ctx!.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 2.4);
-        grad.addColorStop(0, `hsla(50, 100%, 78%, ${alpha})`);
-        grad.addColorStop(0.25, `hsla(35, 100%, 60%, ${alpha * 0.85})`);
-        grad.addColorStop(0.55, `hsla(${p.hue}, 90%, 55%, ${alpha * 0.45})`);
+        const grad = ctx!.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 2.2);
+        grad.addColorStop(0, `hsla(${p.hue}, 95%, 70%, ${alpha})`);
+        grad.addColorStop(0.5, `hsla(${p.hue}, 90%, 55%, ${alpha * 0.55})`);
         grad.addColorStop(1, 'transparent');
 
         ctx!.fillStyle = grad;
         ctx!.beginPath();
-        ctx!.arc(p.x, p.y, radius * 2.4, 0, Math.PI * 2);
+        ctx!.arc(p.x, p.y, radius * 2.2, 0, Math.PI * 2);
         ctx!.fill();
       }
 
-      // Parlak iz - imlecin kendisi
+      // Sade sari iz - imlecin kendisi
       if (visible) {
-        const coreSize = hovering ? 11 : 7;
+        const coreSize = hovering ? 6 : 4;
         const coreGrad = ctx!.createRadialGradient(
           mouseX,
           mouseY,
@@ -171,9 +159,9 @@ export function CustomCursor() {
           mouseY,
           coreSize,
         );
-        coreGrad.addColorStop(0, 'rgba(255, 245, 220, 1)');
-        coreGrad.addColorStop(0.4, 'rgba(255, 200, 110, 0.85)');
-        coreGrad.addColorStop(1, 'rgba(255, 140, 50, 0)');
+        coreGrad.addColorStop(0, 'hsla(50, 95%, 70%, 0.85)');
+        coreGrad.addColorStop(0.5, 'hsla(48, 90%, 60%, 0.45)');
+        coreGrad.addColorStop(1, 'hsla(48, 90%, 55%, 0)');
         ctx!.globalCompositeOperation = 'source-over';
         ctx!.fillStyle = coreGrad;
         ctx!.beginPath();

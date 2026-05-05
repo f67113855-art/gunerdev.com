@@ -1,6 +1,5 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import {
   motion,
   useMotionTemplate,
@@ -10,23 +9,174 @@ import {
 import { SectionHeading } from '@/components/SectionHeading';
 import { cn } from '@/lib/utils';
 
+type ReasonIconType =
+  | 'discipline'
+  | 'performance'
+  | 'communication'
+  | 'product'
+  | 'scalability'
+  | 'partnership';
+
 type Reason = {
   title: string;
   description: string;
-  icon: ReactNode;
+  iconType: ReasonIconType;
   span: string;
 };
 
-const iconProps = {
-  width: 20,
-  height: 20,
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  strokeWidth: 1.75,
-  strokeLinecap: 'round' as const,
-  strokeLinejoin: 'round' as const,
-};
+const GRAD_ACCENT = 'reasonIconAccent';
+const GRAD_HIGHLIGHT = 'reasonIconHighlight';
+
+function Defs() {
+  return (
+    <defs>
+      <linearGradient id={GRAD_ACCENT} x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="hsl(var(--accent))" />
+        <stop offset="100%" stopColor="hsl(var(--accent-muted))" />
+      </linearGradient>
+      <linearGradient id={GRAD_HIGHLIGHT} x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="white" stopOpacity="0.55" />
+        <stop offset="100%" stopColor="white" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+  );
+}
+
+function ReasonIcon({ type, className }: { type: ReasonIconType; className?: string }) {
+  const baseProps = {
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    'aria-hidden': true,
+    className,
+  };
+  const fillGrad = `url(#${GRAD_ACCENT})`;
+  const highlight = `url(#${GRAD_HIGHLIGHT})`;
+  const stroke = 'hsl(var(--accent-foreground))';
+
+  switch (type) {
+    case 'discipline':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <path
+            d="M12 2 L20 5 V11 c0 5-3.5 8-8 10 c-4.5-2-8-5-8-10 V5 z"
+            fill={fillGrad}
+          />
+          <path
+            d="M12 2 L20 5 V11 c0 1-0.2 2-0.5 3 H4.5 C4.2 13 4 12 4 11 V5 z"
+            fill={highlight}
+          />
+          <path
+            d="M8.5 12 L11 14.5 L15.5 10"
+            fill="none"
+            stroke={stroke}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case 'performance':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <path
+            d="M13 2 L3 14 H11 L10 22 L21 10 H13 L14 2 z"
+            fill={fillGrad}
+          />
+          <path d="M13 2 L3 14 H11" fill={highlight} />
+          <line
+            x1="13"
+            y1="2"
+            x2="11"
+            y2="14"
+            stroke={stroke}
+            strokeWidth="0.8"
+            strokeOpacity="0.35"
+          />
+        </svg>
+      );
+    case 'communication':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <path
+            d="M3 5 a2 2 0 0 1 2-2 h14 a2 2 0 0 1 2 2 v10 a2 2 0 0 1-2 2 H10 L5 22 V17 H5 a2 2 0 0 1-2-2 z"
+            fill={fillGrad}
+          />
+          <path
+            d="M3 5 a2 2 0 0 1 2-2 h14 a2 2 0 0 1 2 2 v5 H3 z"
+            fill={highlight}
+          />
+          <circle cx="8" cy="10" r="1" fill={stroke} fillOpacity="0.85" />
+          <circle cx="12" cy="10" r="1" fill={stroke} fillOpacity="0.85" />
+          <circle cx="16" cy="10" r="1" fill={stroke} fillOpacity="0.85" />
+        </svg>
+      );
+    case 'product':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <circle cx="12" cy="12" r="10" fill={fillGrad} />
+          <circle cx="12" cy="12" r="10" fill={highlight} />
+          <circle cx="12" cy="12" r="6.5" fill={stroke} fillOpacity="0.25" />
+          <circle cx="12" cy="12" r="3.5" fill={stroke} fillOpacity="0.55" />
+          <circle cx="12" cy="12" r="1.5" fill={fillGrad} />
+        </svg>
+      );
+    case 'scalability':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <path
+            d="M12 2 L22 7 L12 12 L2 7 z"
+            fill={fillGrad}
+          />
+          <path d="M12 2 L22 7 L12 12 L2 7 z" fill={highlight} />
+          <path
+            d="M2 12 L12 17 L22 12"
+            fill="none"
+            stroke={fillGrad}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M2 17 L12 22 L22 17"
+            fill="none"
+            stroke={fillGrad}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeOpacity="0.7"
+          />
+        </svg>
+      );
+    case 'partnership':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <path
+            d="M12 21 c-1.5-1-7-5-9-9 c-1-2-0.5-5 1.5-6.5 a4.5 4.5 0 0 1 6 0.8 L12 8 l1.5-1.7 a4.5 4.5 0 0 1 6-0.8 c2 1.5 2.5 4.5 1.5 6.5 c-2 4-7.5 8-9 9 z"
+            fill={fillGrad}
+          />
+          <path
+            d="M12 21 c-1.5-1-7-5-9-9 c-1-2-0.5-5 1.5-6.5 a4.5 4.5 0 0 1 6 0.8 L12 8 l1.5-1.7 a4.5 4.5 0 0 1 6-0.8 c2 1.5 2.5 4.5 1.5 6.5 z"
+            fill={highlight}
+          />
+          <path
+            d="M9 12 L11 14 L15 10"
+            fill="none"
+            stroke={stroke}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeOpacity="0.85"
+          />
+        </svg>
+      );
+  }
+}
 
 const reasons: Reason[] = [
   {
@@ -34,74 +184,42 @@ const reasons: Reason[] = [
     description:
       'Test edilmiş kod, code review kültürü ve sürekli entegrasyon. Hız ile kaliteyi birlikte teslim ediyoruz.',
     span: 'lg:col-span-7',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
+    iconType: 'discipline',
   },
   {
     title: 'Performans önceliği',
     description:
       'Her satır kod performans gözetilerek yazılır. Core Web Vitals ve ölçülebilir metriklerle çalışırız.',
     span: 'lg:col-span-5',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
-      </svg>
-    ),
+    iconType: 'performance',
   },
   {
     title: 'Şeffaf iletişim',
     description:
       'Haftalık demo, açık roadmap ve doğrudan erişilebilir geliştiriciler. Sürpriz olmaz.',
     span: 'lg:col-span-4',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-      </svg>
-    ),
+    iconType: 'communication',
   },
   {
     title: 'Ürün odaklı yaklaşım',
     description:
       'Sadece kod yazmıyoruz; iş sonuçlarına odaklanıyoruz. Her teknik karar ürün hedefinizle hizalanır.',
     span: 'lg:col-span-4',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="6" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
+    iconType: 'product',
   },
   {
     title: 'Ölçeklenebilir mimari',
     description:
       'Bugünün ihtiyacını çözen, yarının yüküne hazır sistemler tasarlıyoruz. Yeniden yazma maliyetinden kaçının.',
     span: 'lg:col-span-4',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
-        <path d="m22 12-8.58 3.91a2 2 0 0 1-1.66 0L2 12" />
-        <path d="m22 17-8.58 3.91a2 2 0 0 1-1.66 0L2 17" />
-      </svg>
-    ),
+    iconType: 'scalability',
   },
   {
     title: 'Uzun vadeli ortaklık',
     description:
       'Proje teslim sonrası sizi bırakmıyoruz. Bakım, izleme ve sürekli iyileştirmede yanınızdayız.',
     span: 'lg:col-span-12',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-        <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" />
-        <path d="m18 15-2-2" />
-        <path d="m15 18-2-2" />
-      </svg>
-    ),
+    iconType: 'partnership',
   },
 ];
 
@@ -145,11 +263,11 @@ function ReasonCard({ reason, index }: { reason: Reason; index: number }) {
         <div className="flex items-center justify-between">
           <span
             aria-hidden="true"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent transition-all duration-300 group-hover:scale-105 group-hover:border-accent/40 group-hover:bg-accent/15"
+            className="relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/15 shadow-[0_0_24px_-6px_hsl(var(--accent)/0.5)] ring-1 ring-accent/30 transition-all duration-300 group-hover:scale-105 group-hover:bg-accent/25 group-hover:shadow-[0_0_32px_-4px_hsl(var(--accent)/0.7)]"
           >
-            {reason.icon}
+            <ReasonIcon type={reason.iconType} className="h-8 w-8" />
           </span>
-          <span className="text-xs font-mono text-muted-foreground/60 tabular-nums">
+          <span className="font-mono text-sm font-semibold tabular-nums text-accent/80">
             {String(index + 1).padStart(2, '0')}
           </span>
         </div>

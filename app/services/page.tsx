@@ -46,10 +46,10 @@ export default function ServicesPage() {
                   />
 
                   <div className="relative flex items-center justify-between">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
-                      <ServiceIcon slug={service.slug} className="h-6 w-6" />
+                    <span className="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/15 text-accent shadow-[0_0_24px_-6px_hsl(var(--accent)/0.5)] ring-1 ring-accent/30 transition-all group-hover:bg-accent/25 group-hover:shadow-[0_0_32px_-4px_hsl(var(--accent)/0.7)]">
+                      <ServiceIcon slug={service.slug} className="h-9 w-9" />
                     </span>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                       HZM.{service.number}
                     </span>
                   </div>
