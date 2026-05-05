@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -20,9 +21,11 @@ type ProjectCardProps = {
   project: Project;
   index?: number;
   className?: string;
+  href?: string;
 };
 
-export function ProjectCard({ project, index = 0, className }: ProjectCardProps) {
+export function ProjectCard({ project, index = 0, className, href }: ProjectCardProps) {
+  const isLinked = Boolean(href);
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
@@ -31,6 +34,7 @@ export function ProjectCard({ project, index = 0, className }: ProjectCardProps)
       transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.06 }}
       className={cn(
         'group relative flex flex-col gap-6 rounded-2xl border border-border bg-surface p-7 transition-all duration-300 hover:border-muted-foreground/30 md:p-8',
+        isLinked && 'hover:-translate-y-0.5 hover:border-accent/40',
         className,
       )}
     >
@@ -93,6 +97,22 @@ export function ProjectCard({ project, index = 0, className }: ProjectCardProps)
           </span>
         ))}
       </footer>
+
+      {isLinked && href && (
+        <Link
+          href={href}
+          aria-label={`${project.title} vaka çalışmasını aç`}
+          className="absolute inset-0 rounded-2xl"
+        >
+          <span className="sr-only">Detayı incele</span>
+        </Link>
+      )}
+      {isLinked && (
+        <div className="flex items-center gap-2 text-sm font-medium text-accent">
+          Detayı incele
+          <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+        </div>
+      )}
     </motion.article>
   );
 }

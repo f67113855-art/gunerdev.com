@@ -37,11 +37,11 @@ export const footerNavigation = {
   services: {
     title: 'Hizmetler',
     links: [
-      { label: 'Web Uygulamaları', href: '/services#web-applications' },
-      { label: 'Özel Yazılım', href: '/services#custom-software' },
-      { label: 'Backend & API', href: '/services#backend-api' },
-      { label: 'Performans Optimizasyonu', href: '/services#performance' },
-      { label: 'Teknik Danışmanlık', href: '/services#consulting' },
+      { label: 'Web Uygulamaları', href: '/services/web-uygulamalari' },
+      { label: 'Özel Yazılım', href: '/services/ozel-yazilim' },
+      { label: 'Backend & API', href: '/services/backend-api' },
+      { label: 'Performans Optimizasyonu', href: '/services/performans-optimizasyonu' },
+      { label: 'Teknik Danışmanlık', href: '/services/teknik-danismanlik' },
     ],
   },
   legal: {
