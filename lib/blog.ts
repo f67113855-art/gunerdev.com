@@ -260,7 +260,7 @@ Sonuç: doğru CMS seçimi, projenizin gerçek ihtiyaçlarını anlamakla başla
     date: '2026-03-14',
     category: 'Teknoloji',
     tags: ['SSR', 'SSG', 'Mimari'],
-    cover: '/blog/cover-tech-code.jpg',
+    cover: '/kayseri-1.jpg',
     coverAlt: 'SSR ve SSG karşılaştırması',
     readingMinutes: 6,
     content: `Modern web framework'leri size birden fazla render stratejisi sunar: Static Site Generation (SSG), Server-Side Rendering (SSR), Incremental Static Regeneration (ISR), Client-Side Rendering (CSR) ve karışım modeller. Hepsi kulağa benzer geliyor; ama her birinin kendine özgü avantajı, dezavantajı ve ideal kullanım senaryosu var.
@@ -323,7 +323,7 @@ Tek bir doğru cevap yok. Sayfa bazında karar verin: bu sayfayı saniyede kaç 
     date: '2026-03-06',
     category: 'Teknoloji',
     tags: ['Güvenlik', 'OWASP', 'DevOps'],
-    cover: '/blog/cover-tech-security.jpg',
+    cover: '/erciyes.jpg',
     coverAlt: 'Web güvenlik kalkanı',
     readingMinutes: 7,
     content: `Web güvenliği, çoğu küçük ve orta ölçekli işletme için "biz neden hedef olalım ki" tavrıyla atlanan bir konu. Oysa otomatik tarayıcılar saldırı için spesifik kurban seçmez; tüm internete dağılırlar. Bir gece, sitenizin defacement saldırısına uğradığını veya tüm veritabanınızın çalındığını öğrenmek istemiyorsanız, temel güvenlik adımlarını mutlaka uygulayın.
@@ -390,7 +390,7 @@ Güvenlik bir defalık iş değil; sürekli bir disiplindir. Bu 7 adımı uygula
     date: '2026-02-26',
     category: 'Teknoloji',
     tags: ['PWA', 'Mobil', 'Performans'],
-    cover: '/blog/cover-tech-mobile.jpg',
+    cover: '/kayseri-2.jpg',
     coverAlt: 'PWA mobil uygulama',
     readingMinutes: 6,
     content: `Bir mobil uygulama geliştirmek istediğinizde önünüze çıkan tablo: iOS için ayrı geliştirme, Android için ayrı geliştirme, App Store onay süreçleri, %30 komisyon, sürekli güncellemeler... Maliyet hızlıca 100.000 TL'leri bulur ve bakım masrafı sürer.
@@ -459,7 +459,7 @@ PWA, "uygulama gerekli" denkleminin tek cevabı değil. Ama 2026'da pek çok kü
     date: '2026-02-18',
     category: 'Teknoloji',
     tags: ['API', 'Mimari', 'Backend'],
-    cover: '/parallax-tech.jpg',
+    cover: '/kayseri-3.jpg',
     coverAlt: 'API mimarisi',
     readingMinutes: 6,
     content: `Geleneksel yazılım geliştirme yaklaşımında, önce arayüz tasarlanır, sonra arayüze uygun bir backend yazılır. API'ler, başka bir kanaldan erişim gerekiyorsa sonradan eklenir. Bu yaklaşım hızlı başlangıç sağlar; ancak ilk yıldan sonra ciddi sorunlar üretir.
@@ -528,7 +528,7 @@ API-First yaklaşım kısa vadede biraz daha fazla planlama gerektirir; ama uzun
     date: '2026-02-10',
     category: 'Teknoloji',
     tags: ['Erişilebilirlik', 'A11y', 'UX'],
-    cover: '/blog/cover-tech-perf.jpg',
+    cover: '/kayseri-4.jpg',
     coverAlt: 'Web erişilebilirlik',
     readingMinutes: 6,
     content: `Web erişilebilirliği (a11y), genellikle "ekran okuyucu kullanan görme engelliler için" olarak dar bir çerçevede algılanır. Oysa erişilebilirlik aslında çok daha geniş bir alandır ve doğru uygulandığında tüm kullanıcı deneyimini iyileştirir.
@@ -840,7 +840,7 @@ Kayseri'deki güzellik salonu sahibi müşterilerimize özel demo gösterebiliri
     date: '2026-01-02',
     category: 'Sektörel Çözümler',
     tags: ['Özel Yazılım', 'Otomasyon', 'Verimlilik'],
-    cover: '/blog/cover-tech-code.jpg',
+    cover: '/kayseri-5.jpg',
     coverAlt: 'Özel yazılım geliştirme',
     readingMinutes: 6,
     content: `Pek çok işletme bilgisayar programları ihtiyacını piyasadaki hazır yazılımlarla karşılamayı dener. Logo, Mikro, Excel makroları, çeşitli SaaS abonelikleri... Ancak her işletmenin özgün süreçleri vardır ve bir noktada hazır yazılımlar yetmemeye başlar.
