@@ -1,3 +1,7 @@
+'use client';
+
+import { useId } from 'react';
+
 export type NavIconType =
   | 'home'
   | 'about'
@@ -33,8 +37,9 @@ export function NavIcon({ type, className }: NavIconProps) {
     'aria-hidden': true,
     className,
   };
-  const accentId = `navIconAccent-${type}`;
-  const highlightId = `navIconHighlight-${type}`;
+  const uid = useId();
+  const accentId = `navIconAccent-${type}-${uid}`;
+  const highlightId = `navIconHighlight-${type}-${uid}`;
   const fillGrad = `url(#${accentId})`;
   const highlight = `url(#${highlightId})`;
   const stroke = 'hsl(var(--accent-foreground))';

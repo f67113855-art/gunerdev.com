@@ -1,3 +1,7 @@
+'use client';
+
+import { useId } from 'react';
+
 type ChannelIconProps = {
   type: 'email' | 'phone' | 'telegram' | 'location' | 'whatsapp' | 'github' | 'linkedin' | 'instagram';
   className?: string;
@@ -25,8 +29,9 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     'aria-hidden': true,
     className,
   };
-  const accentId = `channelIconAccent-${type}`;
-  const highlightId = `channelIconHighlight-${type}`;
+  const uid = useId();
+  const accentId = `channelIconAccent-${type}-${uid}`;
+  const highlightId = `channelIconHighlight-${type}-${uid}`;
   const fillGrad = `url(#${accentId})`;
   const highlight = `url(#${highlightId})`;
   const stroke = 'hsl(var(--accent-foreground))';
