@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import { BlogCover } from '@/components/BlogCover';
 import { PageHero } from '@/components/PageHero';
 import { getAllPosts } from '@/lib/blog';
 import { buildMetadata } from '@/lib/seo';
@@ -43,12 +43,9 @@ export default function BlogPage() {
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all hover:-translate-y-0.5 hover:border-accent/40"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={post.cover}
-                    alt={post.coverAlt}
-                    fill
-                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  <BlogCover
+                    post={post}
+                    className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
                   <span className="absolute left-3 top-3 rounded-full border border-border bg-background/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground backdrop-blur">
