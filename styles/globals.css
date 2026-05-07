@@ -50,8 +50,10 @@
   }
 
   [data-theme='contact'] {
-    --theme-hue: 212; /* mavi */
-    --theme-glow-secondary: 226 60% 22%;
+    --theme-hue: 208; /* parlak mavi */
+    --theme-glow-secondary: 220 80% 28%;
+    --accent: 208 100% 68%;
+    --accent-muted: 214 95% 58%;
   }
 
   [data-theme='blog'] {
