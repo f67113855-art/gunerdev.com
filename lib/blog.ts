@@ -100,7 +100,7 @@ Bu adımları sistematik biçimde uyguladığınızda, mevcut sitenizin yüklenm
     date: '2026-04-08',
     category: 'Teknoloji',
     tags: ['SEO', 'Core Web Vitals', 'Performans'],
-    cover: '/blog/cover-tech-perf.jpg',
+    cover: '/parallax-tech.jpg',
     coverAlt: 'SEO ve Google sıralaması',
     readingMinutes: 6,
     content: `Google, 2021 yılında Core Web Vitals'i resmi sıralama faktörü olarak duyurduğunda pek çok site sahibinin gündemine girdi. Aradan geçen yıllarda metrikler güncellendi, bazıları emekliye ayrıldı, yenileri eklendi. Bu yazıda 2026 yılı itibarıyla geçerli üç temel metriği ve nasıl iyileştireceğinizi anlatıyoruz.
@@ -200,7 +200,7 @@ Sonuç olarak, KVKK uyumlu bir form bir hukuk işi değildir; teknik bir tasarı
     date: '2026-03-22',
     category: 'Teknoloji',
     tags: ['CMS', 'Headless', 'WordPress'],
-    cover: '/blog/cover-tech-code.jpg',
+    cover: '/blog/cover-tech-mobile.jpg',
     coverAlt: 'CMS karşılaştırma',
     readingMinutes: 6,
     content: `İçerik yönetim sistemi (CMS) seçimi, bir web projesinin başında alınan en uzun ömürlü kararlardan biridir. WordPress, web'in yaklaşık %43'ünü çalıştırmaya devam ediyor; aynı zamanda Strapi, Sanity, Contentful gibi headless CMS'ler de hızla yayılıyor. Hangisi sizin projeniz için doğru?
@@ -459,7 +459,7 @@ PWA, "uygulama gerekli" denkleminin tek cevabı değil. Ama 2026'da pek çok kü
     date: '2026-02-18',
     category: 'Teknoloji',
     tags: ['API', 'Mimari', 'Backend'],
-    cover: '/blog/cover-tech-code.jpg',
+    cover: '/parallax-tech.jpg',
     coverAlt: 'API mimarisi',
     readingMinutes: 6,
     content: `Geleneksel yazılım geliştirme yaklaşımında, önce arayüz tasarlanır, sonra arayüze uygun bir backend yazılır. API'ler, başka bir kanaldan erişim gerekiyorsa sonradan eklenir. Bu yaklaşım hızlı başlangıç sağlar; ancak ilk yıldan sonra ciddi sorunlar üretir.
@@ -528,7 +528,7 @@ API-First yaklaşım kısa vadede biraz daha fazla planlama gerektirir; ama uzun
     date: '2026-02-10',
     category: 'Teknoloji',
     tags: ['Erişilebilirlik', 'A11y', 'UX'],
-    cover: '/blog/cover-tech-mobile.jpg',
+    cover: '/blog/cover-tech-perf.jpg',
     coverAlt: 'Web erişilebilirlik',
     readingMinutes: 6,
     content: `Web erişilebilirliği (a11y), genellikle "ekran okuyucu kullanan görme engelliler için" olarak dar bir çerçevede algılanır. Oysa erişilebilirlik aslında çok daha geniş bir alandır ve doğru uygulandığında tüm kullanıcı deneyimini iyileştirir.

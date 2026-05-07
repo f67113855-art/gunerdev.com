@@ -1,7 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { BlogCover } from '@/components/BlogCover';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { businessInfo } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
@@ -75,7 +75,14 @@ export default async function BlogPostPage({
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div aria-hidden="true" className="absolute inset-0">
-          <BlogCover post={post} className="absolute inset-0 h-full w-full" />
+          <Image
+            src={post.cover}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_50%,transparent_0%,hsl(var(--background)/0.45)_70%)]" />
         </div>
@@ -115,7 +122,13 @@ export default async function BlogPostPage({
       <section className="relative -mt-8 md:-mt-12">
         <div className="container">
           <div className="relative mx-auto aspect-[16/9] max-w-4xl overflow-hidden rounded-2xl border border-border shadow-soft">
-            <BlogCover post={post} className="absolute inset-0 h-full w-full" />
+            <Image
+              src={post.cover}
+              alt={post.coverAlt}
+              fill
+              sizes="(min-width: 1280px) 1024px, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
@@ -163,9 +176,12 @@ export default async function BlogPostPage({
                   className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-all hover:-translate-y-0.5 hover:border-accent/40"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <BlogCover
-                      post={other}
-                      className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                    <Image
+                      src={other.cover}
+                      alt={other.coverAlt}
+                      fill
+                      sizes="(min-width: 1024px) 380px, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
                   <div className="p-5">
