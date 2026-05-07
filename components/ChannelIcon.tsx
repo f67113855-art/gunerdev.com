@@ -1,5 +1,5 @@
 type ChannelIconProps = {
-  type: 'email' | 'phone' | 'telegram' | 'location' | 'whatsapp' | 'github' | 'linkedin';
+  type: 'email' | 'phone' | 'telegram' | 'location' | 'whatsapp' | 'github' | 'linkedin' | 'instagram';
   className?: string;
 };
 
@@ -124,6 +124,17 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
             fill={stroke}
             fillOpacity="0.95"
           />
+        </svg>
+      );
+    case 'instagram':
+      return (
+        <svg {...baseProps}>
+          <Defs />
+          <rect x="3" y="3" width="18" height="18" rx="5" fill={fillGrad} />
+          <rect x="3" y="3" width="18" height="9" rx="5" fill={highlight} />
+          <circle cx="12" cy="12" r="4.2" fill={stroke} fillOpacity="0.95" />
+          <circle cx="12" cy="12" r="2.6" fill={fillGrad} />
+          <circle cx="17.2" cy="6.8" r="1.1" fill={stroke} fillOpacity="0.95" />
         </svg>
       );
     case 'linkedin':

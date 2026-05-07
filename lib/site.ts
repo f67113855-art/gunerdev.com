@@ -10,6 +10,7 @@ export const site = {
   phone: '+90 536 215 16 44',
   address: 'Kayseri, Türkiye',
   telegram: 'FurkanGUNERDEV',
+  instagram: 'furkn1_',
   locale: 'tr_TR',
   language: 'tr',
 } as const;

@@ -12,7 +12,7 @@ export const metadata = buildMetadata({
 });
 
 type Channel = {
-  icon: 'email' | 'phone' | 'telegram' | 'location';
+  icon: 'email' | 'phone' | 'telegram' | 'location' | 'instagram';
   label: string;
   value: string;
   href: string | null;
@@ -42,6 +42,14 @@ const channels: Channel[] = [
     href: `https://t.me/${site.telegram}`,
     external: true,
     description: 'Hızlı yanıt için tercih edilen kanal; mesai dışında da takip edilir.',
+  },
+  {
+    icon: 'instagram',
+    label: 'Instagram',
+    value: `@${site.instagram}`,
+    href: `https://instagram.com/${site.instagram}`,
+    external: true,
+    description: 'Çalışmalardan kareler ve süreç güncellemeleri burada paylaşılır.',
   },
   {
     icon: 'location',
