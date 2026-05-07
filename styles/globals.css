@@ -50,8 +50,8 @@
   }
 
   [data-theme='contact'] {
-    --theme-hue: 340; /* rose */
-    --theme-glow-secondary: 320 55% 24%;
+    --theme-hue: 212; /* mavi */
+    --theme-glow-secondary: 226 60% 22%;
   }
 
   [data-theme='blog'] {
