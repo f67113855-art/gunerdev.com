@@ -11,17 +11,14 @@ type NavIconProps = {
   className?: string;
 };
 
-const GRAD_ACCENT = 'navIconAccent';
-const GRAD_HIGHLIGHT = 'navIconHighlight';
-
-function Defs() {
+function Defs({ accentId, highlightId }: { accentId: string; highlightId: string }) {
   return (
     <defs>
-      <linearGradient id={GRAD_ACCENT} x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id={accentId} x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="hsl(var(--accent))" />
         <stop offset="100%" stopColor="hsl(var(--accent-muted))" />
       </linearGradient>
-      <linearGradient id={GRAD_HIGHLIGHT} x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient id={highlightId} x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stopColor="white" stopOpacity="0.55" />
         <stop offset="100%" stopColor="white" stopOpacity="0" />
       </linearGradient>
@@ -36,15 +33,17 @@ export function NavIcon({ type, className }: NavIconProps) {
     'aria-hidden': true,
     className,
   };
-  const fillGrad = `url(#${GRAD_ACCENT})`;
-  const highlight = `url(#${GRAD_HIGHLIGHT})`;
+  const accentId = `navIconAccent-${type}`;
+  const highlightId = `navIconHighlight-${type}`;
+  const fillGrad = `url(#${accentId})`;
+  const highlight = `url(#${highlightId})`;
   const stroke = 'hsl(var(--accent-foreground))';
 
   switch (type) {
     case 'home':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M3 11 L12 3 L21 11 L21 20 A1 1 0 0 1 20 21 H4 A1 1 0 0 1 3 20 Z"
             fill={fillGrad}
@@ -68,7 +67,7 @@ export function NavIcon({ type, className }: NavIconProps) {
     case 'about':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M4 21 a8 8 0 0 1 16 0 H4z"
             fill={fillGrad}
@@ -81,7 +80,7 @@ export function NavIcon({ type, className }: NavIconProps) {
     case 'services':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <rect x="3" y="3" width="8" height="8" rx="2" fill={fillGrad} />
           <rect x="13" y="3" width="8" height="8" rx="2" fill={fillGrad} fillOpacity="0.7" />
           <rect x="3" y="13" width="8" height="8" rx="2" fill={fillGrad} fillOpacity="0.7" />
@@ -93,7 +92,7 @@ export function NavIcon({ type, className }: NavIconProps) {
     case 'projects':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M3 7 a2 2 0 0 1 2-2 h4 l2 2 h8 a2 2 0 0 1 2 2 v9 a2 2 0 0 1-2 2 H5 a2 2 0 0 1-2-2 z"
             fill={fillGrad}
@@ -112,7 +111,7 @@ export function NavIcon({ type, className }: NavIconProps) {
     case 'blog':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M5 3 H14 L20 9 V20 a1 1 0 0 1-1 1 H5 a1 1 0 0 1-1-1 V4 a1 1 0 0 1 1-1 z"
             fill={fillGrad}
@@ -127,7 +126,7 @@ export function NavIcon({ type, className }: NavIconProps) {
     case 'contact':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <rect x="3" y="5" width="18" height="14" rx="2" fill={fillGrad} />
           <path
             d="M3 6 L12 13 L21 6 V8 L12 14.5 L3 8 z"

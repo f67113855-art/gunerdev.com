@@ -3,17 +3,14 @@ type ChannelIconProps = {
   className?: string;
 };
 
-const GRAD_ACCENT = 'channelIconAccent';
-const GRAD_HIGHLIGHT = 'channelIconHighlight';
-
-function Defs() {
+function Defs({ accentId, highlightId }: { accentId: string; highlightId: string }) {
   return (
     <defs>
-      <linearGradient id={GRAD_ACCENT} x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id={accentId} x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="hsl(var(--accent))" />
         <stop offset="100%" stopColor="hsl(var(--accent-muted))" />
       </linearGradient>
-      <linearGradient id={GRAD_HIGHLIGHT} x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient id={highlightId} x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stopColor="white" stopOpacity="0.55" />
         <stop offset="100%" stopColor="white" stopOpacity="0" />
       </linearGradient>
@@ -28,15 +25,17 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     'aria-hidden': true,
     className,
   };
-  const fillGrad = `url(#${GRAD_ACCENT})`;
-  const highlight = `url(#${GRAD_HIGHLIGHT})`;
+  const accentId = `channelIconAccent-${type}`;
+  const highlightId = `channelIconHighlight-${type}`;
+  const fillGrad = `url(#${accentId})`;
+  const highlight = `url(#${highlightId})`;
   const stroke = 'hsl(var(--accent-foreground))';
 
   switch (type) {
     case 'email':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <rect x="2" y="5" width="20" height="14" rx="2.5" fill={fillGrad} />
           <path
             d="M2 6 L12 13 L22 6 V8.5 L12 14.5 L2 8.5 z"
@@ -49,7 +48,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'phone':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M5 3 h4.5 l2 5.5 -3 2 a11 11 0 0 0 5 5 l2-3 5.5 2 V19 a2 2 0 0 1-2 2 A16 16 0 0 1 3 5 a2 2 0 0 1 2-2 z"
             fill={fillGrad}
@@ -63,7 +62,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'telegram':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <circle cx="12" cy="12" r="10" fill={fillGrad} />
           <circle cx="12" cy="12" r="10" fill={highlight} />
           <path
@@ -81,7 +80,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'whatsapp':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M2.5 21.5 L4 17 a9 9 0 1 1 3.5 3.3 L2.5 21.5 z"
             fill={fillGrad}
@@ -100,7 +99,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'location':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <path
             d="M12 22 c-4-5-7-8.5-7-12 a7 7 0 1 1 14 0 c0 3.5-3 7-7 12 z"
             fill={fillGrad}
@@ -116,7 +115,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'github':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <circle cx="12" cy="12" r="10" fill={fillGrad} />
           <circle cx="12" cy="12" r="10" fill={highlight} />
           <path
@@ -129,7 +128,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'instagram':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <rect x="3" y="3" width="18" height="18" rx="5" fill={fillGrad} />
           <rect x="3" y="3" width="18" height="9" rx="5" fill={highlight} />
           <circle cx="12" cy="12" r="4.2" fill={stroke} fillOpacity="0.95" />
@@ -140,7 +139,7 @@ export function ChannelIcon({ type, className }: ChannelIconProps) {
     case 'linkedin':
       return (
         <svg {...baseProps}>
-          <Defs />
+          <Defs accentId={accentId} highlightId={highlightId} />
           <rect x="2" y="2" width="20" height="20" rx="3" fill={fillGrad} />
           <rect x="2" y="2" width="20" height="9" rx="3" fill={highlight} />
           <rect x="6" y="10" width="2.8" height="9" fill={stroke} fillOpacity="0.95" />
