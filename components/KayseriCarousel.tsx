@@ -125,10 +125,11 @@ export function KayseriCarousel() {
                 src={currentSlide.src}
                 alt={currentSlide.alt}
                 fill
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+                quality={75}
                 className="object-cover"
                 style={{ objectPosition: currentSlide.position ?? 'center' }}
-                priority={index === 0}
+                loading="lazy"
               />
             </motion.div>
           </AnimatePresence>

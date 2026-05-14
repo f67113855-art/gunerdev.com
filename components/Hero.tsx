@@ -38,7 +38,8 @@ export function Hero() {
           fill
           sizes="100vw"
           priority
-          quality={90}
+          fetchPriority="high"
+          quality={70}
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/95" />
