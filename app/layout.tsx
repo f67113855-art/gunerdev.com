@@ -1,11 +1,13 @@
-import type { Metadata, Viewport } from 'next';
+import type { Viewport } from 'next';
 import { Inter, Fraunces, Geist_Mono } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingContact } from '@/components/FloatingContact';
 import { CustomCursor } from '@/components/CustomCursor';
 import { ThemeRouter } from '@/components/ThemeRouter';
+import { JsonLd } from '@/components/JsonLd';
 import { buildMetadata } from '@/lib/seo';
+import { organizationJsonLd, websiteJsonLd } from '@/lib/schema';
 import { site } from '@/lib/site';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
@@ -33,6 +35,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  ...buildMetadata(),
   verification: {
     google: "_cO7_s2vg8jPHn3HYfwS3_bIRfzxLt0-dqHJ7Caal7g",
   },
@@ -53,6 +56,7 @@ export default function RootLayout({
     <html lang={site.language} className={cn(inter.variable, fraunces.variable, geistMono.variable, 'dark')} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
       </head>
       <body
         className="min-h-screen flex flex-col bg-background text-foreground"

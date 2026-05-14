@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { PageHero } from '@/components/PageHero';
 import { CTA } from '@/components/CTA';
+import { JsonLd } from '@/components/JsonLd';
 import { buildMetadata } from '@/lib/seo';
+import { breadcrumbJsonLd, faqJsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({
   title: 'Sıkça Sorulan Sorular',
@@ -175,8 +177,18 @@ const groups: FaqGroup[] = [
 ];
 
 export default function FaqPage() {
+  const allFaqItems = groups.flatMap((g) => g.items);
   return (
     <>
+      <JsonLd
+        data={[
+          faqJsonLd(allFaqItems),
+          breadcrumbJsonLd([
+            { name: 'Anasayfa', path: '/' },
+            { name: 'SSS', path: '/sss' },
+          ]),
+        ]}
+      />
       <PageHero
         eyebrow="Yardım"
         title="Sıkça sorulan sorular"

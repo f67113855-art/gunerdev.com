@@ -6,6 +6,8 @@ import { PageHero } from '@/components/PageHero';
 import { getAllProjects, getProjectBySlug } from '@/lib/projects';
 import { getAllServices } from '@/lib/services';
 import { buildMetadata } from '@/lib/seo';
+import { breadcrumbJsonLd } from '@/lib/schema';
+import { JsonLd } from '@/components/JsonLd';
 
 type Params = { slug: string };
 
@@ -42,6 +44,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Anasayfa', path: '/' },
+          { name: 'Projeler', path: '/projects' },
+          { name: project.title, path: `/projects/${project.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow={`Vaka Çalışması · ${project.category}`}
         title={project.title}

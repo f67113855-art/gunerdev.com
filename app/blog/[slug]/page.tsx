@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { businessInfo } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
+import { blogPostingJsonLd, breadcrumbJsonLd } from '@/lib/schema';
+import { JsonLd } from '@/components/JsonLd';
 
 type Params = { slug: string };
 
@@ -72,6 +74,16 @@ export default async function BlogPostPage({
 
   return (
     <article>
+      <JsonLd
+        data={[
+          blogPostingJsonLd(post),
+          breadcrumbJsonLd([
+            { name: 'Anasayfa', path: '/' },
+            { name: 'Blog', path: '/blog' },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        ]}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div aria-hidden="true" className="absolute inset-0">

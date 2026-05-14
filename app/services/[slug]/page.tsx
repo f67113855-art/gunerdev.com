@@ -6,6 +6,8 @@ import { PageHero } from '@/components/PageHero';
 import { getAllServices, getServiceBySlug } from '@/lib/services';
 import { getProjectBySlug } from '@/lib/projects';
 import { buildMetadata } from '@/lib/seo';
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from '@/lib/schema';
+import { JsonLd } from '@/components/JsonLd';
 
 type Params = { slug: string };
 
@@ -41,6 +43,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
   return (
     <>
+      <JsonLd
+        data={[
+          serviceJsonLd(service),
+          breadcrumbJsonLd([
+            { name: 'Anasayfa', path: '/' },
+            { name: 'Hizmetler', path: '/services' },
+            { name: service.shortTitle, path: `/services/${service.slug}` },
+          ]),
+          faqJsonLd(service.faq),
+        ]}
+      />
       <PageHero
         eyebrow={`Hizmet · ${service.number}`}
         title={service.title}

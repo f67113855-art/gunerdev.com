@@ -47,6 +47,29 @@ export const footerNavigation = {
       { label: 'Teknik Danışmanlık', href: '/services/teknik-danismanlik' },
     ],
   },
+  solutions: {
+    title: 'Çözümler',
+    links: [
+      { label: 'Kayseri Web Tasarım', href: '/kayseri-web-tasarim' },
+      { label: 'Kayseri E-Ticaret', href: '/kayseri-e-ticaret-yazilim' },
+      { label: 'Kayseri Mobil Uygulama', href: '/kayseri-mobil-uygulama' },
+      { label: 'Kurumsal Web Sitesi', href: '/kayseri-kurumsal-web-sitesi' },
+      { label: 'Restoran Web Sitesi', href: '/kayseri-restoran-web-sitesi' },
+      { label: 'Klinik Randevu Sistemi', href: '/kayseri-klinik-randevu-sistemi' },
+      { label: 'Kuaför Randevu Sistemi', href: '/kayseri-kuafor-randevu-sistemi' },
+      { label: 'Kayseri SEO Hizmeti', href: '/kayseri-seo-hizmeti' },
+    ],
+  },
+  regions: {
+    title: 'Hizmet Bölgeleri',
+    links: [
+      { label: 'Kayseri', href: '/kayseri-yazilim-firmasi' },
+      { label: 'Melikgazi', href: '/melikgazi-yazilim-firmasi' },
+      { label: 'Kocasinan', href: '/kocasinan-yazilim-firmasi' },
+      { label: 'Talas', href: '/talas-yazilim-firmasi' },
+      { label: 'İncesu', href: '/incesu-yazilim-firmasi' },
+    ],
+  },
   legal: {
     title: 'Yasal',
     links: [

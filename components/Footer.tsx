@@ -86,26 +86,29 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7">
-            {Object.values(footerNavigation).map((column) => (
-              <div key={column.title}>
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
-                  {column.title}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {column.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-7 lg:grid-cols-4">
+            {(['company', 'services', 'solutions', 'regions'] as const).map((key) => {
+              const column = footerNavigation[key];
+              return (
+                <div key={column.title}>
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
+                    {column.title}
+                  </h3>
+                  <ul className="mt-4 space-y-3">
+                    {column.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -115,6 +118,18 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             © {year} {site.legalName}. Tüm hakları saklıdır.
           </p>
+          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            {footerNavigation.legal.links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
           <p className="text-xs italic text-muted-foreground">
             <span className="font-display">{businessInfo.founder}</span>{' '}
             tarafından özenle geliştirildi.

@@ -1,8 +1,14 @@
 import Link from 'next/link';
 import { PageHero } from '@/components/PageHero';
 import { CTA } from '@/components/CTA';
+import { JsonLd } from '@/components/JsonLd';
 import { buildMetadata } from '@/lib/seo';
 import { site } from '@/lib/site';
+import {
+  breadcrumbJsonLd,
+  faqJsonLd,
+  localBusinessJsonLd,
+} from '@/lib/schema';
 
 export const metadata = buildMetadata({
   title: 'Kayseri Yazılım Firması | Web ve Özel Yazılım Geliştirme',
@@ -111,6 +117,22 @@ const faq = [
 export default function KayseriPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          localBusinessJsonLd({
+            name: `${site.name} — Kayseri Yazılım Firması`,
+            description:
+              'Kayseri merkezli yazılım firması. Kurumsal web sitesi, e-ticaret, özel yazılım ve mobil uygulama geliştirme.',
+            url: `${site.url}/kayseri-yazilim-firmasi`,
+            areaName: 'Kayseri',
+          }),
+          breadcrumbJsonLd([
+            { name: 'Anasayfa', path: '/' },
+            { name: 'Kayseri Yazılım Firması', path: '/kayseri-yazilim-firmasi' },
+          ]),
+          faqJsonLd(faq),
+        ]}
+      />
       <PageHero
         eyebrow="Kayseri · Yerel hizmet"
         title="Kayseri'nin yazılım partneri"
