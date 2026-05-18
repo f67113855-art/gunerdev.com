@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PageHero } from '@/components/PageHero';
 import { CTA } from '@/components/CTA';
 import { buildMetadata } from '@/lib/seo';
@@ -129,9 +130,9 @@ export default function PrivacyPage() {
                   {site.email}
                 </a>{' '}
                 adresine yazılı başvuruda bulunabilirsiniz. Daha detaylı bilgi için{' '}
-                <a href="/kvkk" className="text-accent hover:underline">
+                <Link href="/kvkk" className="text-accent hover:underline">
                   KVKK Aydınlatma Metni
-                </a>
+                </Link>
                 ’ni inceleyebilirsiniz.
               </p>
             </div>

@@ -23,6 +23,9 @@ rm -rf node_modules .next public server.js
 echo "==> Yeni release aciliyor"
 tar xzf "$RELEASE_TAR" -C "$APP_DIR"
 
+echo "==> Izinler root-only write (777 saldiri yuzeyini kapatir)"
+chmod -R u=rwX,go=rX "$APP_DIR"
+
 echo "==> Log klasoru hazirlaniyor"
 mkdir -p logs
 
