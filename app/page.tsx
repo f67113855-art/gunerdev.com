@@ -1,6 +1,7 @@
 import { Hero } from '@/components/Hero';
 import { KayseriCarousel } from '@/components/KayseriCarousel';
 import { Services } from '@/components/Services';
+import { LocalSolutions } from '@/components/LocalSolutions';
 import { Process } from '@/components/Process';
 import { Parallax } from '@/components/Parallax';
 import { Reviews } from '@/components/Reviews';
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Hero />
       <KayseriCarousel />
       <Services />
+      <LocalSolutions />
       <Process />
       <Parallax />
       <Reviews />

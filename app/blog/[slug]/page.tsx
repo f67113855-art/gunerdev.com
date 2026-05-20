@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { getAllPosts, getPostBySlug, getRelatedLandingSlugs } from '@/lib/blog';
+import { getLandingPage } from '@/lib/landing';
 import { businessInfo } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 import { blogPostingJsonLd, breadcrumbJsonLd } from '@/lib/schema';
@@ -71,6 +72,10 @@ export default async function BlogPostPage({
 
   const allPosts = getAllPosts();
   const otherPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 3);
+
+  const relatedLandings = getRelatedLandingSlugs(post, 3)
+    .map((s) => getLandingPage(s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
     <article>
@@ -174,6 +179,43 @@ export default async function BlogPostPage({
           </div>
         </div>
       </section>
+
+      {/* Related landings */}
+      {relatedLandings.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <div className="mx-auto max-w-3xl">
+              <p className="eyebrow">Konuyla ilgili hizmetler</p>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight">
+                Bu yazıya konu olan çözümlerimiz
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                Yazıda bahsedilen konularda Kayseri ve çevresine sunduğumuz hazır
+                paketler:
+              </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedLandings.map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/${page.slug}`}
+                    className="group flex items-start justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3 transition-all hover:-translate-y-0.5 hover:border-accent/40"
+                  >
+                    <span className="text-sm font-medium tracking-tight text-foreground transition-colors group-hover:text-accent">
+                      {page.hero.title}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="mt-0.5 text-accent transition-transform group-hover:translate-x-0.5"
+                    >
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Other posts */}
       {otherPosts.length > 0 && (

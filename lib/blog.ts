@@ -927,3 +927,78 @@ export function getAllPosts(): BlogPost[] {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
+
+// Blog etiketlerini en ilgili landing slug'larına eşler.
+// İlk eşleşmeden başlayarak benzersiz slug'lar toplanır, eksik kalırsa fallback eklenir.
+const tagToLandings: Record<string, string[]> = {
+  SEO: ['kayseri-seo-hizmeti'],
+  Performans: ['kayseri-seo-hizmeti', 'kayseri-web-tasarim'],
+  'Core Web Vitals': ['kayseri-seo-hizmeti'],
+  'Next.js': ['kayseri-web-tasarim', 'kayseri-ozel-yazilim'],
+  React: ['kayseri-web-tasarim'],
+  KVKK: ['kayseri-kurumsal-web-sitesi'],
+  Form: ['kayseri-web-tasarim'],
+  Güvenlik: ['kayseri-ozel-yazilim'],
+  CMS: ['kayseri-kurumsal-web-sitesi', 'kayseri-web-tasarim'],
+  Headless: ['kayseri-web-tasarim'],
+  WordPress: ['kayseri-web-tasarim'],
+  SSR: ['kayseri-web-tasarim'],
+  SSG: ['kayseri-web-tasarim'],
+  Mimari: ['kayseri-ozel-yazilim'],
+  OWASP: ['kayseri-ozel-yazilim'],
+  DevOps: ['kayseri-ozel-yazilim'],
+  PWA: ['kayseri-mobil-uygulama'],
+  Mobil: ['kayseri-mobil-uygulama'],
+  Erişilebilirlik: ['kayseri-web-tasarim'],
+  A11y: ['kayseri-web-tasarim'],
+  UX: ['kayseri-web-tasarim'],
+  API: ['kayseri-ozel-yazilim'],
+  Backend: ['kayseri-ozel-yazilim'],
+  Otomotiv: ['kayseri-otomotiv-galeri-web-sitesi'],
+  Galeri: ['kayseri-otomotiv-galeri-web-sitesi'],
+  'E-ticaret': ['kayseri-e-ticaret-yazilim'],
+  Emlak: ['kayseri-emlak-web-sitesi'],
+  CRM: ['kayseri-ozel-yazilim'],
+  Lead: ['kayseri-emlak-web-sitesi'],
+  Restoran: ['kayseri-restoran-web-sitesi', 'kayseri-kafe-qr-menu'],
+  'F&B': ['kayseri-restoran-web-sitesi', 'kayseri-kafe-qr-menu'],
+  'Online Sipariş': ['kayseri-restoran-web-sitesi'],
+  Güzellik: ['kayseri-kuafor-randevu-sistemi'],
+  Salon: ['kayseri-kuafor-randevu-sistemi'],
+  Randevu: ['kayseri-kuafor-randevu-sistemi', 'kayseri-klinik-randevu-sistemi'],
+  'Özel Yazılım': ['kayseri-ozel-yazilim'],
+  Otomasyon: ['kayseri-ozel-yazilim'],
+  Verimlilik: ['kayseri-ozel-yazilim'],
+};
+
+const FALLBACK_LANDINGS = [
+  'kayseri-web-tasarim',
+  'kayseri-ozel-yazilim',
+  'kayseri-seo-hizmeti',
+];
+
+export function getRelatedLandingSlugs(post: BlogPost, limit = 3): string[] {
+  const result: string[] = [];
+  const seen = new Set<string>();
+
+  for (const tag of post.tags) {
+    const candidates = tagToLandings[tag] ?? [];
+    for (const slug of candidates) {
+      if (!seen.has(slug)) {
+        seen.add(slug);
+        result.push(slug);
+        if (result.length >= limit) return result;
+      }
+    }
+  }
+
+  for (const slug of FALLBACK_LANDINGS) {
+    if (!seen.has(slug)) {
+      seen.add(slug);
+      result.push(slug);
+      if (result.length >= limit) return result;
+    }
+  }
+
+  return result;
+}

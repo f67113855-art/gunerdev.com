@@ -6,7 +6,27 @@ import { getAllProjects } from '@/lib/projects';
 import { getAllLandingPages } from '@/lib/landing';
 
 // Stabil tarih: her build'de değişmesin diye sabit; içerik gerçekten güncellendiğinde elle artırılır.
-const SITE_LAST_UPDATED = new Date('2026-05-14T00:00:00Z');
+// Kategori başına ayrı tarih: Google'a tek tip "hepsi aynı gün güncellendi" sinyali vermemek için.
+const STATIC_LAST_UPDATED = new Date('2026-05-14T00:00:00Z');
+const SERVICES_LAST_UPDATED = new Date('2026-05-05T00:00:00Z');
+const PROJECTS_LAST_UPDATED = new Date('2026-05-05T00:00:00Z');
+const LANDING_LAST_UPDATED = new Date('2026-05-14T00:00:00Z');
+
+// Her statik rotanın gerçek son güncelleme tarihi.
+const staticRouteDates: Record<string, Date> = {
+  '/': new Date('2026-05-14T00:00:00Z'),
+  '/about': new Date('2026-05-02T00:00:00Z'),
+  '/services': new Date('2026-05-05T00:00:00Z'),
+  '/projects': new Date('2026-05-05T00:00:00Z'),
+  '/blog': new Date('2026-05-14T00:00:00Z'),
+  '/contact': new Date('2026-05-02T00:00:00Z'),
+  '/fiyatlandirma': new Date('2026-05-05T00:00:00Z'),
+  '/sss': new Date('2026-05-05T00:00:00Z'),
+  '/kayseri-yazilim-firmasi': new Date('2026-05-05T00:00:00Z'),
+  '/privacy': new Date('2026-05-02T00:00:00Z'),
+  '/terms': new Date('2026-05-02T00:00:00Z'),
+  '/kvkk': new Date('2026-05-02T00:00:00Z'),
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -24,21 +44,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/kvkk', priority: 0.3, changeFrequency: 'yearly' as const },
   ].map((route) => ({
     url: `${site.url}${route.path}`,
-    lastModified: SITE_LAST_UPDATED,
+    lastModified: staticRouteDates[route.path] ?? STATIC_LAST_UPDATED,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
 
   const serviceRoutes: MetadataRoute.Sitemap = getAllServices().map((service) => ({
     url: `${site.url}/services/${service.slug}`,
-    lastModified: SITE_LAST_UPDATED,
+    lastModified: SERVICES_LAST_UPDATED,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
 
   const projectRoutes: MetadataRoute.Sitemap = getAllProjects().map((project) => ({
     url: `${site.url}/projects/${project.slug}`,
-    lastModified: SITE_LAST_UPDATED,
+    lastModified: PROJECTS_LAST_UPDATED,
     changeFrequency: 'yearly' as const,
     priority: 0.7,
   }));
@@ -52,7 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const landingRoutes: MetadataRoute.Sitemap = getAllLandingPages().map((page) => ({
     url: `${site.url}/${page.slug}`,
-    lastModified: SITE_LAST_UPDATED,
+    lastModified: LANDING_LAST_UPDATED,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
